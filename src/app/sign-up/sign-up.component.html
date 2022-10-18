@@ -4,18 +4,18 @@
       <div class="sm-jumbotron center-align">
         <h2>User Registration</h2>
       </div>
-      <form class="col s12 white" #userRegistrationForm="ngForm">
+      <form class="col s12 white" #userRegistrationForm="ngForm" (ngSubmit)="OnSubmit(userRegistrationForm)">
         <div class="row">
           <div class="input-field col s6">
             <input type="text" name="UserName" #UserName="ngModel" [(ngModel)]="user.UserName">
             <label>UserName</label>
           </div>
           <div class="input-field col s6">
-            <input type="text" name="Password" #Password="ngModel" [(ngModel)]="user.Password">
+            <input type="password" name="Password" #Password="ngModel" [(ngModel)]="user.Password">
             <label>Password</label>
           </div>
 
-          <div class="input-field col s6">
+          <div class="input-field col s12">
             <input type="text" name="Email" #Email="ngModel" [(ngModel)]="user.Email">
             <label>Email</label>
           </div>

@@ -28,4 +28,9 @@ export class UserService {
     
     return this.http.post(this.url + '/token', data, { headers: reqHeader });
   }
+
+  getUserClaims(){
+   return this.http.get(this.url+'api/GetUserClaims',
+    {headers: new HttpHeaders({'Authorization':'Bearer '+localStorage.getItem('userToken')})});
+  }
 }

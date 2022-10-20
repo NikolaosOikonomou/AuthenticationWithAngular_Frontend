@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/shared/user.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignInComponent implements OnInit {
 
-  constructor() { }
+  isLoginError: boolean = false;
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
+  OnSubmit(userName:string, password:string){
+    this.userService.userAuthentication(userName,password).subscribe({
+      next: (data:any) => 
+      {
+        console.log(data),
+        localStorage.setItem('userToken',data.access_token),
+        this.router.navigate(['/home']);
+      },
+      error: error => {console.log(error), this.isLoginError = true},
+      complete: () => console.log("Sign In Done")
+    });
+  }
 }

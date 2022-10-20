@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from './user.model';
 
 
@@ -7,7 +7,7 @@ import { User } from './user.model';
   providedIn: 'root'
 })
 export class UserService {
-  readonly url = 'https://localhost:44361/'
+  readonly url = 'https://localhost:44361/';
 
   constructor(private http: HttpClient) { }
 
@@ -20,5 +20,12 @@ export class UserService {
       LastName: user.LastName
     }
     return this.http.post(this.url + '/api/User/Register', body);
+  }
+
+  userAuthentication(userName:string,password:string){
+    var data = "username=" + userName + "&password=" + password + "&grant_type=password";
+    var reqHeader = new HttpHeaders({ 'Content-Type': 'application/x-www-urlencoded','No-Auth':'True' });
+    
+    return this.http.post(this.url + '/token', data, { headers: reqHeader });
   }
 }

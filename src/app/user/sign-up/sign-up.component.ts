@@ -12,11 +12,13 @@ import { UserService } from 'src/app/shared/user.service';
 export class SignUpComponent implements OnInit {
 
   user!: User;
-  emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\/[a-z]{2,4}$";
+  roles!: any[];
+  emailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
   constructor(private userService: UserService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.resetForm();
+    this. GetRolles();
   }
 
   resetForm(form?: NgForm){
@@ -29,6 +31,8 @@ export class SignUpComponent implements OnInit {
         FirstName: '',
         LastName: ''
       }
+      if(this.roles)
+        this.roles.map(x => x.selected = false);
   }
 
   OnSubmit(form: NgForm){
@@ -39,4 +43,20 @@ export class SignUpComponent implements OnInit {
     });
   }
 
+  GetRolles(){
+    this.userService.getAllRoles().subscribe({
+      next: (data:any) => 
+      { 
+        console.log(data), 
+        this.roles = data
+        // data.foreach((obj:any) => obj.selected = false)
+      },
+      error: error => console.log(error),
+      complete: () => console.log("Getting Roles Done")
+    })
+  }
+
+  updateSelectedRoles(index:number){
+    this.roles[index].selected = !this.roles[index].selected;
+  }
 }

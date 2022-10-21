@@ -33,4 +33,9 @@ export class UserService {
   getUserClaims(){
    return this.http.get(this.url+'api/GetUserClaims');
   }
+
+  getAllRoles() {
+    var reqHeader = new HttpHeaders({ 'No-Auth': 'True' });
+    return this.http.get(this.url + '/api/GetAllRoles', { headers: reqHeader });
+  }
 }

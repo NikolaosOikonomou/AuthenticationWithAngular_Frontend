@@ -11,6 +11,8 @@ import { SignUpComponent } from './user/sign-up/sign-up.component';
 import { SignInComponent } from './user/sign-in/sign-in.component';
 import { HomeComponent } from './home/home.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { AuthInterceptor } from './auth/auth.interceptor';
     SignUpComponent,
     UserComponent,
     SignInComponent,
-    HomeComponent
+    HomeComponent,
+    AdminPanelComponent,
+    ForbiddenComponent
   ],
   imports: [
     BrowserModule,

@@ -21,6 +21,7 @@ export class SignInComponent implements OnInit {
       {
         console.log(data),
         localStorage.setItem('userToken',data.access_token),
+        localStorage.setItem('userRoles',data.role),
         this.router.navigate(['/home']);
       },
       error: error => {console.log(error), this.isLoginError = true},

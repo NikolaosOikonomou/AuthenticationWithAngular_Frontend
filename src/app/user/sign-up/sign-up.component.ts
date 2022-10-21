@@ -29,14 +29,15 @@ export class SignUpComponent implements OnInit {
         Password: '',
         Email: '',
         FirstName: '',
-        LastName: ''
+        LastName: '' 
       }
       if(this.roles)
         this.roles.map(x => x.selected = false);
   }
 
   OnSubmit(form: NgForm){
-    this.userService.registerUser(form.value).subscribe({
+    var x = this.roles.filter(x => x.selected).map(y =>y.Name);
+    this.userService.registerUser(form.value, x).subscribe({
       next: response => this.resetForm(form),
       error: error => {console.log(error), this.toastr.error(error[0])},
       complete: () => {console.log("Form Done"), this.toastr.success('User registration was successful!')}
@@ -49,7 +50,7 @@ export class SignUpComponent implements OnInit {
       { 
         console.log(data), 
         this.roles = data
-        // data.foreach((obj:any) => obj.selected = false)
+        data.foreach((x:any) => x.selected = false)
       },
       error: error => console.log(error),
       complete: () => console.log("Getting Roles Done")

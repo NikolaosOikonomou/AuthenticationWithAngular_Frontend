@@ -30,7 +30,11 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass:"toast-bottom-center",
+      preventDuplicates:true,
+      timeOut:2000
+    }),
     BrowserAnimationsModule
    
   ],
